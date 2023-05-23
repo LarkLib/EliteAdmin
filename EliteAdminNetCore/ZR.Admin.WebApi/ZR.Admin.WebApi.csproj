@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>ZRAdmin.xml</DocumentationFile>
+		<NoWarn>1701;1702;1591,8603,8602,8604,8600</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ZR.CodeGenerator\ZR.CodeGenerator.csproj" />
+		<ProjectReference Include="..\ZR.Service\ZR.Service.csproj" />
+		<ProjectReference Include="..\ZR.Tasks\ZR.Tasks.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AspNetCoreRateLimit" Version="5.0.0" />
+		<PackageReference Include="Lazy.Captcha.Core" Version="2.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.6" />
+		<PackageReference Include="UAParser" Version="3.1.47" />
+		<PackageReference Include="IPTools.China" Version="1.6.0" />
+		<PackageReference Include="NLog" Version="5.1.4" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.3" />
+		<PackageReference Include="Mapster" Version="7.3.0" />
+		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Controllers\" />
+		<Folder Include="Properties\PublishProfiles\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="ip2region.db">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>
