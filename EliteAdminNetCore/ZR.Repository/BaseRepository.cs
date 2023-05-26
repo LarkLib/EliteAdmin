@@ -15,7 +15,7 @@ namespace ZR.Repository
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BaseRepository<T> : SimpleClient<T> where T : class, new()
+    public partial class BaseRepository<T> : SimpleClient<T> where T : class, new()
     {
         public ITenant itenant = null;//多租户事务
         public BaseRepository(ISqlSugarClient context = null) : base(context)

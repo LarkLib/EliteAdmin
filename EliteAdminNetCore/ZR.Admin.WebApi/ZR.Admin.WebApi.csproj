@@ -9,6 +9,9 @@
 		<DocumentationFile>ZRAdmin.xml</DocumentationFile>
 		<NoWarn>1701;1702;1591,8603,8602,8604,8600</NoWarn>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Controllers\BaseController.Elite.cs" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ZR.CodeGenerator\ZR.CodeGenerator.csproj" />
@@ -30,7 +33,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Controllers\" />
 		<Folder Include="Properties\PublishProfiles\" />
 	</ItemGroup>
 

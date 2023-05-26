@@ -9,10 +9,10 @@ using Io = System.IO;
 
 namespace ZR.Admin.WebApi.Controllers
 {
-    public class BaseController : ControllerBase
+    public partial class BaseController : ControllerBase
     {
         public static string TIME_FORMAT_FULL = "yyyy-MM-dd HH:mm:ss";
-        
+
         /// <summary>
         /// 返回成功封装
         /// </summary>
@@ -64,7 +64,7 @@ namespace ZR.Admin.WebApi.Controllers
             var stream = Io.File.OpenRead(path);  //创建文件流
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", HttpUtility.UrlEncode(fileName));
         }
-        
+
         #region 方法
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace ZR.Admin.WebApi.Controllers
             IWebHostEnvironment webHostEnvironment = (IWebHostEnvironment)App.ServiceProvider.GetService(typeof(IWebHostEnvironment));
             string sFileName = $"{fileName}{DateTime.Now:MM-dd-HHmmss}.xlsx";
             string fullPath = Path.Combine(webHostEnvironment.WebRootPath, "export", sFileName);
-            
+
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
             MiniExcel.SaveAs(fullPath, list, sheetName: sheetName);
@@ -171,7 +171,7 @@ namespace ZR.Admin.WebApi.Controllers
             IWebHostEnvironment webHostEnvironment = (IWebHostEnvironment)App.ServiceProvider.GetService(typeof(IWebHostEnvironment));
             string sFileName = $"{fileName}模板.xlsx";
             string newFileName = Path.Combine(webHostEnvironment.WebRootPath, "ImportTemplate", sFileName);
-            
+
             if (!Directory.Exists(newFileName))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(newFileName));
