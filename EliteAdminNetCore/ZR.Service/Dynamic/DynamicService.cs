@@ -11,6 +11,8 @@ using ZR.Repository;
 using ZR.Model;
 using MiniExcelLibs;
 using Infrastructure.Extensions;
+using Aliyun.OSS;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZR.AdminService
 {
@@ -86,6 +88,36 @@ namespace ZR.AdminService
             var sql = Sqls[parm.QueryCode];
             var source = base.Context.SqlQueryable<dynamic>(sql).Where(conModels);
             return source?.ToPage<dynamic>(parm);
+        }
+
+        public int AddDynamicObject(string tableName, Dictionary<string, object> parm)
+        {
+            return base.Context.InsertableByDynamic(parm)
+                .AS(tableName)
+                .ExecuteCommand(); ;
+        }
+
+        public dynamic GetDynamicObjectById(string tableName, string idFieldName, string id)
+        {
+            return base.Context.Queryable<dynamic>().AS(tableName)
+                .Where(idFieldName, "=", id)
+                .First();
+        }
+
+        public int UpdateDynamicObject(string tableName, string idFieldName, Dictionary<string, object> data)
+        {
+            return base.Context.UpdateableByDynamic(data)
+                .AS(tableName)
+                .WhereColumns(idFieldName)
+                .ExecuteCommand();
+        }
+
+        public int DeleteDynamicObjec(string tableName, string idFieldName, int[] idsArr)
+        {
+            return base.Context.Deleteable<object>()
+                .AS(tableName)
+                .Where($"{idFieldName} in (@ids) ", new { ids = idsArr })
+                .ExecuteCommand();
         }
         #endregion
     }

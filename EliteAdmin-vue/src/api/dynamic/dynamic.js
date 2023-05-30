@@ -49,12 +49,12 @@ export function getkeyvalueGroup(query) {
 
 
 /**
-* 新增字段信息配置
+* 新增
 * @param data
 */
-export function addDynamicObject(data) {
+export function addDynamicObject(tableName, data) {
   return request({
-    url: 'dynamic/data/insert',
+    url: 'dynamic/data/insert?tableName=' + tableName,
     method: 'post',
     data: data,
   })
@@ -63,9 +63,9 @@ export function addDynamicObject(data) {
 * 修改字段信息配置
 * @param data
 */
-export function updateBaseFieldConfig(data) {
+export function updateDynamicObject(tableName, idFieldName, data) {
   return request({
-    url: 'elite/BaseFieldConfig',
+    url: `dynamic/data/updateDynamicObject?tableName=${tableName}&idFieldName=${idFieldName}`,
     method: 'PUT',
     data: data,
   })
@@ -74,9 +74,9 @@ export function updateBaseFieldConfig(data) {
 * 获取字段信息配置详情
 * @param {Id}
 */
-export function getBaseFieldConfig(id) {
+export function getDynamicObjectById(tableName, idFieldName, id) {
   return request({
-    url: 'elite/BaseFieldConfig/' + id,
+    url: `dynamic/data/getDynamicObjectById?tableName=${tableName}&idFieldName=${idFieldName}&id=${id}`,
     method: 'get'
   })
 }
@@ -85,9 +85,9 @@ export function getBaseFieldConfig(id) {
 * 删除字段信息配置
 * @param {主键} pid
 */
-export function delBaseFieldConfig(pid) {
+export function deleteDynamicObjec(tableName, idFieldName, pid) {
   return request({
-    url: 'elite/BaseFieldConfig/' + pid,
+    url: `dynamic/data/deleteDynamicObjec?tableName=${tableName}&idFieldName=${idFieldName}&ids=${pid}`,
     method: 'delete'
   })
 }

@@ -12,6 +12,7 @@ using ZR.Model.Dto;
 using ZR.AdminService;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Crypto;
 
 namespace ZR.Admin.WebApi.Controllers
 {
@@ -65,10 +66,35 @@ namespace ZR.Admin.WebApi.Controllers
 
         [HttpPost("insert")]
         [ActionPermissionFilter(Permission = "dynamic:datatable:insert")]
-        public IActionResult AddDynamicObject([FromBody] JObject parm)
+        public int AddDynamicObject([FromQuery] string tableName, [FromBody] Dictionary<string, object> parm)
         {
-            //var response = _DynamicService.GetDataTableBySqlCode(parm);
-            return SUCCESS(parm);
+            return _DynamicService.AddDynamicObject(tableName, parm);
+        }
+
+        [HttpGet("getDynamicObjectById")]
+        [ActionPermissionFilter(Permission = "dynamic:datatable:geyById")]
+        public IActionResult GetDynamicObjectById([FromQuery] string tableName, string idFieldName, string id)
+        {
+            var response = _DynamicService.GetDynamicObjectById(tableName, idFieldName, id);
+            return SUCCESS(response);
+        }
+
+        [HttpPut("updateDynamicObject")]
+        [ActionPermissionFilter(Permission = "dynamic:datatable:update")]
+        public IActionResult UpdateDynamicObject([FromQuery] string tableName, [FromQuery] string idFieldName, [FromBody] Dictionary<string, object> data)
+        {
+            var response = _DynamicService.UpdateDynamicObject(tableName, idFieldName, data);
+            return SUCCESS(response);
+        }
+
+        [HttpDelete("deleteDynamicObjec")]
+        [ActionPermissionFilter(Permission = "dynamic:datatable:delete")]
+        public IActionResult DeleteDynamicObjec([FromQuery] string tableName, [FromQuery] string idFieldName, string ids)
+        {
+            int[] idsArr = Tools.SpitIntArrary(ids);
+            if (idsArr.Length <= 0) { return ToResponse(ApiResult.Error($"删除失败Id 不能为空")); }
+            var response = _DynamicService.DeleteDynamicObjec(tableName, idFieldName, idsArr);
+            return SUCCESS(response);
         }
     }
 }

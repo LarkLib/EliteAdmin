@@ -4,6 +4,7 @@ using System.Data;
 using ZR.Model.Dto;
 using ZR.Model.Elite;
 using ZR.Model;
+using SqlSugar;
 
 namespace ZR.AdminService
 {
@@ -19,5 +20,9 @@ namespace ZR.AdminService
         Dictionary<string, Dictionary<dynamic, dynamic>> GetkeyvalueGroupByTableName(string tableName);
         PagedInfo<dynamic> GetDataTable(DynamicQueryDto parm);
         PagedInfo<dynamic> GetDataTableBySqlCode(DynamicQueryDto parm);
+        int AddDynamicObject(string tableName, Dictionary<string, object> parm);
+        dynamic GetDynamicObjectById(string tableName, string idFieldName, string id);
+        int UpdateDynamicObject(string tableName, string idFieldName, Dictionary<string, object> data);
+        int DeleteDynamicObjec(string tableName, string idFieldName, int[] idsArr);
     }
 }
