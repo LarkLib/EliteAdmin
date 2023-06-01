@@ -14,7 +14,7 @@ export function listDynamicData(data) {
 }
 
 /**
-* 按sql编号分页查询
+* 按sql语句编号分页查询
 * @param {查询条件} data
 */
 export function listDynamicDataBySqlCode(data) {
@@ -49,7 +49,7 @@ export function getkeyvalueGroup(query) {
 
 
 /**
-* 新增
+* 新增秀内容-通用
 * @param data
 */
 export function addDynamicObject(tableName, data) {
@@ -60,7 +60,7 @@ export function addDynamicObject(tableName, data) {
   })
 }
 /**
-* 修改字段信息配置
+* 修改表-通用
 * @param data
 */
 export function updateDynamicObject(tableName, idFieldName, data) {
@@ -71,7 +71,7 @@ export function updateDynamicObject(tableName, idFieldName, data) {
   })
 }
 /**
-* 获取字段信息配置详情
+* 按Id查询数据-通用
 * @param {Id}
 */
 export function getDynamicObjectById(tableName, idFieldName, id) {

@@ -41,6 +41,8 @@ import ImagePreview from '@/components/ImagePreview'
 import DictTag from '@/components/DictTag'
 // el-date-picker 快捷选项
 import dateOptions from '@/utils/dateOptions'
+//二维绘图库
+import VueKonva from 'vue-konva';
 
 const app = createApp(App)
 signalR.init(import.meta.env.VITE_APP_SOCKET_API)
@@ -68,4 +70,4 @@ app.component('svg-icon', SvgIcon)
 
 directive(app)
 
-app.use(pinia).use(router).use(plugins).use(ElementPlus, {}).use(elementIcons).use(vueI18n).mount('#app')
+app.use(pinia).use(router).use(plugins).use(ElementPlus, {}).use(elementIcons).use(vueI18n).use(VueKonva).mount('#app')

@@ -30,6 +30,7 @@
     "js-cookie": "3.0.1",
     "js-md5": "^0.7.3",
     "jsencrypt": "3.2.1",
+    "konva": "^9.0.2",
     "md-editor-v3": "^1.11.11",
     "nprogress": "0.2.0",
     "pinia": "^2.0.33",
@@ -39,6 +40,7 @@
     "vue-clipboard3": "^2.0.0",
     "vue-cropper": "1.0.2",
     "vue-i18n": "^9.2.2",
+    "vue-konva": "^3.0.2",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

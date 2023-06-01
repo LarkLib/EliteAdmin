@@ -22,7 +22,7 @@ namespace ZR.Admin.WebApi.Controllers
     public class DynamicController : BaseController
     {
         /// <summary>
-        /// 管理接口
+        /// 通用管理接口
         /// </summary>
         private readonly IDynamicService _DynamicService;
 
@@ -31,6 +31,11 @@ namespace ZR.Admin.WebApi.Controllers
             _DynamicService = dynamicService;
         }
 
+        /// <summary>
+        /// 按表名查询字段配置信息
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
         [HttpGet("getFiledConfigInfo")]
         [ActionPermissionFilter(Permission = "dynamic:fieldconfiginfo:list")]
         public IActionResult GetFiledConfigInfo([FromQuery] string tableName)
@@ -39,6 +44,11 @@ namespace ZR.Admin.WebApi.Controllers
             return SUCCESS(response);
         }
 
+        /// <summary>
+        /// 查询字段信息配置的sql语句
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
         [HttpGet("getkeyvalueGroup")]
         [ActionPermissionFilter(Permission = "dynamic:fieldconfiginfo:keyvaluegroup")]
         public IActionResult GetkeyvalueGroupByTableName([FromQuery] string tableName)
@@ -47,6 +57,11 @@ namespace ZR.Admin.WebApi.Controllers
             return SUCCESS(response);
         }
 
+        /// <summary>
+        /// 按表名查询数据
+        /// </summary>
+        /// <param name="parm"></param>
+        /// <returns></returns>
         [HttpPost("list")]
         [ActionPermissionFilter(Permission = "dynamic:datatable:list")]
         public IActionResult GetDataTable([FromBody] DynamicQueryDto parm)
@@ -56,6 +71,11 @@ namespace ZR.Admin.WebApi.Controllers
             return SUCCESS(response);
         }
 
+        /// <summary>
+        /// 按sql语句查询数据
+        /// </summary>
+        /// <param name="parm"></param>
+        /// <returns></returns>
         [HttpPost("listBySqlCode")]
         [ActionPermissionFilter(Permission = "dynamic:datatable:sqlcode")]
         public IActionResult GetDataTableBySqlCode([FromBody] DynamicQueryDto parm)
@@ -64,6 +84,12 @@ namespace ZR.Admin.WebApi.Controllers
             return SUCCESS(response);
         }
 
+        /// <summary>
+        /// 按钟表插入数据
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="parm"></param>
+        /// <returns></returns>
         [HttpPost("insert")]
         [ActionPermissionFilter(Permission = "dynamic:datatable:insert")]
         public int AddDynamicObject([FromQuery] string tableName, [FromBody] Dictionary<string, object> parm)
@@ -71,6 +97,13 @@ namespace ZR.Admin.WebApi.Controllers
             return _DynamicService.AddDynamicObject(tableName, parm);
         }
 
+        /// <summary>
+        /// 按Id查询单条记录
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="idFieldName"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("getDynamicObjectById")]
         [ActionPermissionFilter(Permission = "dynamic:datatable:geyById")]
         public IActionResult GetDynamicObjectById([FromQuery] string tableName, string idFieldName, string id)
@@ -79,6 +112,13 @@ namespace ZR.Admin.WebApi.Controllers
             return SUCCESS(response);
         }
 
+        /// <summary>
+        /// 按表名表更新数据
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="idFieldName"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPut("updateDynamicObject")]
         [ActionPermissionFilter(Permission = "dynamic:datatable:update")]
         public IActionResult UpdateDynamicObject([FromQuery] string tableName, [FromQuery] string idFieldName, [FromBody] Dictionary<string, object> data)
@@ -87,6 +127,13 @@ namespace ZR.Admin.WebApi.Controllers
             return SUCCESS(response);
         }
 
+        /// <summary>
+        /// 按Id删除指定表中的数据
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="idFieldName"></param>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpDelete("deleteDynamicObjec")]
         [ActionPermissionFilter(Permission = "dynamic:datatable:delete")]
         public IActionResult DeleteDynamicObjec([FromQuery] string tableName, [FromQuery] string idFieldName, string ids)
