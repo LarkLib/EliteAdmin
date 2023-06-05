@@ -1,7 +1,7 @@
 <!--
  * @Descripttion: (字段信息配置/T_Base_FieldConfig)
  * @Author: (admin)
- * @Date: (2023-05-23)
+ * @Date: (2023-06-04)
 -->
 <template>
   <div>
@@ -25,6 +25,16 @@
         </el-button>
       </el-col>
       <el-col :span="1.5">
+        <el-button type="success" :disabled="single" v-hasPermi="['task:basefieldconfig:edit']" plain icon="edit" @click="handleUpdate">
+          {{ $t('btn.edit') }}
+        </el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button type="danger" :disabled="multiple" v-hasPermi="['task:basefieldconfig:delete']" plain icon="delete" @click="handleDelete">
+          {{ $t('btn.delete') }}
+        </el-button>
+      </el-col>
+      <el-col :span="1.5">
         <el-button type="warning" plain icon="download" @click="handleExport" v-hasPermi="['task:basefieldconfig:export']">
           {{ $t('btn.export') }}
         </el-button>
@@ -40,7 +50,9 @@
       border 
       highlight-current-row 
       @sort-change="sortChange"
+      @selection-change="handleSelectionChange"
       >
+      <el-table-column type="selection" width="50" align="center"/>
       <el-table-column prop="id" label="编号" align="center" v-if="columns.showColumn('id')"/>
       <el-table-column prop="tableName" label="表名" align="center" :show-overflow-tooltip="true" v-if="columns.showColumn('tableName')"/>
       <el-table-column prop="name" label="名称" align="center" :show-overflow-tooltip="true" v-if="columns.showColumn('name')"/>
@@ -282,6 +294,12 @@ function handleQuery() {
 function resetQuery(){
   proxy.resetForm("queryRef")
   handleQuery()
+}
+// 多选框选中数据
+function handleSelectionChange(selection) {
+  ids.value = selection.map((item) => item.id);
+  single.value = selection.length != 1
+  multiple.value = !selection.length;
 }
 // 自定义排序
 function sortChange(column) {

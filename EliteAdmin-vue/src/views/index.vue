@@ -2,7 +2,7 @@
   <div class="app-container home">
     <el-row :gutter="20">
       <el-col :sm="24" :lg="24">
-        <blockquote class="text-warning" style="font-size: 14px">
+        <!--<blockquote class="text-warning" style="font-size: 14px">
           【阿里云特惠专区】
           <el-link href="https://www.aliyun.com/minisite/goods?userCode=uotn5vt1&share_source=copy_link" type="primary" target="_black">
             ☛☛点我进入☚☚
@@ -31,20 +31,19 @@
           <el-link href="https://gitee.com/enterprises?invite_code=Z2l0ZWUtMTI1NzM1OQ%3D%3D" type="primary" target="_blank"> ☛☛点我进入☚☚ </el-link>
           <br />
           <h4 class="text-danger">云产品通用红包，可叠加官网常规优惠使用。(仅限新用户)</h4>
-        </blockquote>
+        </blockquote>-->
       </el-col>
     </el-row>
     <el-row :gutter="20">
       <el-col :lg="16" :sm="24">
-        <h2>ZRAdmin.NET {{ $t('layout.backstageManagement') }}</h2>
+        <h2>EliteAdmin.NET {{ $t('layout.backstageManagement') }}</h2>
         <p>
-          ZRAdmin.NET借鉴了很多开源项目的优点，让你开发Web管理系统更简单，所以我也把它给开源了（前端
-          <code>vue页面</code>主要参考若依，在此表示感谢.)
+          EliteAdmin.NET借鉴了很多开源项目的优点，让你开发Web管理系统更简单.
         </p>
         <p>{{ $t('layout.content1') }}</p>
         <p>
           <b>{{ $t('layout.currentVersion') }}:</b> <span>v{{ version }}</span>
-          <el-link
+          <!--<el-link
             class="ml10"
             type="primary"
             size="small"
@@ -52,13 +51,13 @@
             plain
             @click="goTarget('http://www.izhaorui.cn/doc/changelog.html#' + version)"
             >{{ $t('layout.changeLog') }}
-          </el-link>
+          </el-link>-->
         </p>
         <p>
-          <el-button type="primary" size="small" icon="Cloudy" plain @click="goTarget('https://gitee.com/izory/ZrAdminNetCore')">Gitee </el-button>
+          <!--<el-button type="primary" size="small" icon="Cloudy" plain @click="goTarget('https://gitee.com/izory/ZrAdminNetCore')">Gitee </el-button>
           <el-button type="primary" size="small" icon="Cloudy" plain @click="goTarget('https://github.com/izhaorui/ZrAdmin.NET')"
             >Github
-          </el-button>
+          </el-button>-->
         </p>
         <p></p>
         <h3>{{ $t('layout.tip1') }}</h3>
@@ -107,7 +106,7 @@
 
           <div class="body">
             <div style="color: red">{{ $t('layout.rewardUser') }}</div>
-            <img src="@/assets/images/reward.jpg" alt="donate" style="width: 100%" />
+            <!--<img src="@/assets/images/reward.jpg" alt="donate" style="width: 100%" />-->
           </div>
         </el-card>
       </el-col>
@@ -119,9 +118,9 @@
           <div class="body">
             <p>
               <el-icon> <promotion /> </el-icon>{{ $t('layout.officialWebsite') }}：
-              <el-link href="http://www.izhaorui.cn/doc" target="_blank"> http://www.izhaorui.cn/doc </el-link>
+            <el-link href="http://www.shenyang-elite.com/" target="_blank"> http://www.shenyang-elite.com/ </el-link>
             </p>
-            <p>
+            <!--<p>
               <el-icon> <UserFilled /> </el-icon>{{ $t('layout.qqGroup') }}：
               <s>满191349103</s>
 
@@ -130,7 +129,7 @@
                 href="https://qm.qq.com/cgi-bin/qm/qr?k=kgt4HsckdljU0VM-0kxND6d_igmfuPlL&authKey=r55YUbruiKQ5iwC/folG7KLCmZ++Y4rQVgNlvLbUniUMkbk24Y9+zNuOmOnjAjRc&noverify=0">
                 &nbsp;462862273
               </el-link>
-            </p>
+            </p>-->
           </div>
         </el-card>
       </el-col>
