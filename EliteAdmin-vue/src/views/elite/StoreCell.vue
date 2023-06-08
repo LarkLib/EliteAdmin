@@ -16,8 +16,16 @@
       </el-col>
       <el-col :span="15.5">
         <el-button-group class="ml-14">
-          <el-tooltip class="item" effect="dark" content="刷新" placement="top">
-            <el-button :icon="Edit" />
+          <el-tooltip class="item" effect="dark" placement="top">
+            <template #content>
+              {{ $t('storeCell.but_stocktaking') }}
+            </template>
+            <el-button type="primary"
+                       :icon="Upload"
+                       @click="palletDown()"
+                       :disabled="!materialQueryParams.conditions[0].fieldValue">
+              {{ $t('storeCell.but_stocktaking') }}
+            </el-button>
           </el-tooltip>
           <el-button type="primary" :icon="Search">Search</el-button>
           <el-button type="primary" :icon="Share" />
@@ -49,7 +57,7 @@
                   fill: '#191970'
                   }"></v-text>
             <!--列数坐标-->
-            <v-text v-if="isWriteCellCol(item.f_CellCol)"
+            <v-text v-if="isWriteCellCol($event,item.f_CellCol)"
                     :config="{
                     x:15+35*item.f_CellCol,
                     y:350,
@@ -190,7 +198,7 @@
 
 <script setup lang="js">
   import { reactive, ref, onMounted } from 'vue'
-  import { getFiledConfigInfo, getkeyvalueGroup, listDynamicData, addDynamicObject, getDynamicObjectById, updateDynamicObject, deleteDynamicObjec } from '@/api/dynamic/dynamic.js'
+  import { getFiledConfigInfo, getkeyvalueGroup, listDynamicData, addDynamicObject, getDynamicObjectById, updateDynamicObject, deleteDynamicObjec, executePalletDown } from '@/api/dynamic/dynamic.js'
   import { Delete, Edit, Search, Share, Upload, Check, Message, Star, ArrowLeft, ArrowRight, } from '@element-plus/icons-vue'
 
   const msg = ref()
@@ -306,7 +314,8 @@
       return true;
     }
   }
-  function isWriteCellCol(col) {
+  function isWriteCellCol(el, col) {
+    console.log(el)
     if (!col) return false;
     if (cellCols.includes(col))
       return false;
@@ -318,7 +327,6 @@
   function getStoreList() {
     if (!!currentCellName.value) {
       let rect = cellTooltip.value.getNode().getStage().findOne("." + currentCellName.value)
-      console.log("rect", rect)
       if (!!rect) {
         rect.stroke('black')
         rect.strokeWidth(1)
@@ -434,6 +442,31 @@
         loading.value = false
       }
     })
+  }
+
+  function palletDown() {
+    const storeCell = materialQueryParams.conditions[0].fieldValue;
+    if (!storeCell) {
+      proxy.$modal.alertWarning("请选择需要盘点出库的货位.")
+      return;
+    }
+    proxy
+      .$confirm('是否确认盘点编号为"' + storeCell + '"的数据项？')
+      .then(() => {
+        return executePalletDown(storeCell)
+      }).then(res => {
+        const { code, data } = res
+        if (code == 200) {
+          const { returnValue, message } = data
+          if (returnValue == 200) {
+            getStoreList()
+            proxy.$modal.msgSuccess("盘点出库成功")
+          }
+          else {
+            proxy.$modal.alertError("盘点出库失败:" + message)
+          }
+        }
+      }).catch(() => { })
   }
   getTableInfo()
 </script>

@@ -13,6 +13,7 @@ using ZR.AdminService;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Crypto;
+using System.Data;
 
 namespace ZR.Admin.WebApi.Controllers
 {
@@ -141,7 +142,34 @@ namespace ZR.Admin.WebApi.Controllers
             int[] idsArr = Tools.SpitIntArrary(ids);
             if (idsArr.Length <= 0) { return ToResponse(ApiResult.Error($"删除失败Id 不能为空")); }
             var response = _DynamicService.DeleteDynamicObjec(tableName, idFieldName, idsArr);
+
             return SUCCESS(response);
+        }
+
+        /// <summary>
+        /// 按表名查询数据
+        /// </summary>
+        /// <param name="parm"></param>
+        /// <returns></returns>
+        [HttpPost("getDataTableData")]
+        [ActionPermissionFilter(Permission = "dynamic:datatable:list")]
+        public DataTable GetDataTableData([FromBody] DynamicQueryDto parm)
+        {
+            return _DynamicService.GetDataTableData(parm);
+        }
+
+        /// <summary>
+        /// 按表名查询数据
+        /// </summary>
+        /// <param name="parm"></param>
+        /// <returns></returns>
+        [HttpGet("executePalletDown")]
+        [ActionPermissionFilter(Permission = "dynamic:datatable:list")]
+        public IActionResult ExecutePalletDown(long storeCell)
+        {
+            string message = null;
+            var response = _DynamicService.ExecutePalletDown(storeCell, 0, ref message);
+            return SUCCESS(new { returnValue = response, message = message });
         }
     }
 }

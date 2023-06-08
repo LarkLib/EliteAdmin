@@ -77,6 +77,17 @@ namespace ZR.AdminService
             //    .ToPageList(parm.PageNum, parm.PageSize, ref total);
         }
 
+        public DataTable GetDataTableData(DynamicQueryDto parm)
+        {
+            var conModels = new List<IConditionalModel>();
+            var conditions = parm.Conditions;
+            foreach (var condition in conditions)
+            {
+                if (condition!.FieldValue.IsNotEmpty()) conModels.Add(new ConditionalModel { FieldName = condition.FieldName, ConditionalType = condition.ConditionalType, FieldValue = condition.FieldValue });
+            }
+            var source = base.Context.Ado.GetDataTable(Sqls[parm.QueryCode]);
+            return source;
+        }
         public PagedInfo<dynamic> GetDataTableBySqlCode(DynamicQueryDto parm)
         {
             var conModels = new List<IConditionalModel>();

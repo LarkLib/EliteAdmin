@@ -19,10 +19,12 @@ namespace ZR.AdminService
         List<BaseFieldConfig> GetFiledConfigInfo(string tableName, long userId = 1);
         Dictionary<string, Dictionary<dynamic, dynamic>> GetkeyvalueGroupByTableName(string tableName);
         PagedInfo<dynamic> GetDataTable(DynamicQueryDto parm);
+        DataTable GetDataTableData(DynamicQueryDto parm);
         PagedInfo<dynamic> GetDataTableBySqlCode(DynamicQueryDto parm);
         int AddDynamicObject(string tableName, Dictionary<string, object> parm);
         dynamic GetDynamicObjectById(string tableName, string idFieldName, string id);
         int UpdateDynamicObject(string tableName, string idFieldName, Dictionary<string, object> data);
         int DeleteDynamicObjec(string tableName, string idFieldName, int[] idsArr);
+        string ExecutePalletDown(long storeCell, int downFlag, ref string message);
     }
 }

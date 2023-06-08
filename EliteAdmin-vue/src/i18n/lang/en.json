@@ -165,5 +165,8 @@
     "newPwd": "new password",
     "oldPwd": "Old Password",
     "nickName": "User's Nickname"
+  },
+  "storeCell": {
+    "but_stocktaking": "Stock taking"
   }
 }

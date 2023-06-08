@@ -91,6 +91,17 @@ export function deleteDynamicObjec(tableName, idFieldName, pid) {
     method: 'delete'
   })
 }
+
+/**
+* 指定货位盘点出库
+* @storeCell {主键} pid
+*/
+export function executePalletDown(storeCell) {
+  return request({
+    url: `dynamic/data/executePalletDown?storeCell=${storeCell}`,
+    method: 'get'
+  })
+}
 // 导出字段信息配置
 export async function exportBaseFieldConfig(query) {
   await downFile('elite/BaseFieldConfig/export', { ...query })
