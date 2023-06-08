@@ -152,7 +152,7 @@ namespace ZR.Admin.WebApi.Controllers
         /// <param name="parm"></param>
         /// <returns></returns>
         [HttpPost("getDataTableData")]
-        [ActionPermissionFilter(Permission = "dynamic:datatable:list")]
+        [ActionPermissionFilter(Permission = "dynamic:datatable:data")]
         public DataTable GetDataTableData([FromBody] DynamicQueryDto parm)
         {
             return _DynamicService.GetDataTableData(parm);
@@ -164,7 +164,7 @@ namespace ZR.Admin.WebApi.Controllers
         /// <param name="parm"></param>
         /// <returns></returns>
         [HttpGet("executePalletDown")]
-        [ActionPermissionFilter(Permission = "dynamic:datatable:list")]
+        [ActionPermissionFilter(Permission = "dynamic:store:palletDown")]
         public IActionResult ExecutePalletDown(long storeCell)
         {
             string message = null;
